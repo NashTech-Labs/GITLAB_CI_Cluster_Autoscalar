@@ -27,7 +27,7 @@ deploy:
    script:
      - kubectl apply -f cluster-autoscaler.yaml
 
-# specify your tags(For example your runner tag) 
+#specify your tags(For example your runner tag) 
    tags:
      - 
 
