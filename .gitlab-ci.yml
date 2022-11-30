@@ -15,7 +15,7 @@ stages:
 prepare:
    stage: prepare
    script:
-    - aws iam create-policy --policy-name AmazonEKSClusterAutoscalerPolicy --policy-document file://cluster-autoscaler-policy-${ENV}.json
+    - aws iam create-policy --policy-name AmazonEKSClusterAutoscalerPolicy --policy-document file://cluster-autoscaler-policy.json
 
 # specify your tags(For example your runner tag)
    tags:
@@ -25,7 +25,7 @@ prepare:
 deploy:
    stage: deploy
    script:
-     - kubectl apply -f cluster-autoscaler-${ENV}.yaml
+     - kubectl apply -f cluster-autoscaler.yaml
 
 # specify your tags(For example your runner tag) 
    tags:
