@@ -1,0 +1,33 @@
+image: Add_A_Image_with_preinstalled_tools
+
+variables:  
+  AWS_ACCOUNT_ID: account Id of aws
+  AWS_DEFAULT_REGION: region where your eks is present
+  EKS_NAME: Name of your EKS
+
+before_script:
+  - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $EKS_NAME
+
+stages:
+  - prepare
+  - deploy
+  
+prepare:
+   stage: prepare
+   script:
+    - aws iam create-policy --policy-name AmazonEKSClusterAutoscalerPolicy --policy-document file://cluster-autoscaler-policy-${ENV}.json
+
+# specify your tags(For example your runner tag)
+   tags:
+     - 
+
+
+deploy:
+   stage: deploy
+   script:
+     - kubectl apply -f cluster-autoscaler-${ENV}.yaml
+
+# specify your tags(For example your runner tag) 
+   tags:
+     - 
+
